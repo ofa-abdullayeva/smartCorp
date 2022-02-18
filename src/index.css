@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("./images/Binary\ Code\ Background\ \ 01_preview1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 50px auto;
+  width: 1000px;
 }
 
 code {
