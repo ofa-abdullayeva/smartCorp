@@ -1,6 +1,6 @@
 import React from 'react'
 import '../app_form/style.css'
-import Button from '../button'
+// import Button from '../button'
 
 const AppForm = () => {
   return (
@@ -16,11 +16,11 @@ const AppForm = () => {
             type="number"
             placeholder='Maaş Azn-lə' 
           />
-          {/* <button 
+          <button 
             type='submit'
-            className='btn btn-outline-info ml-3'
-          >əlavə et</button> */}
-          <Button classNames='btn btn-outline-info ml-3' value='Əlavə et'/>
+            className='btn btn-outline-light ml-3'
+          >əlavə et</button>
+          {/* <Button classNames='btn btn-outline-info ml-3' value='Əlavə et'/> */}
         </form>
      
     </div>

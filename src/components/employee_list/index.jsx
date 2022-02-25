@@ -1,18 +1,23 @@
 import React from 'react';
 import EmployeeListItem from '../employee_list_item';
-import {data} from '../data/data';
 import '../employee_list';
 
 
-console.log(data)
-const EmployeeList = () => {
+
+const EmployeeList = ({data , onDelete}) => {
   return (
     <ul className='app-list list-group'>
 
         {
             data.map(item =>{
+              const {id, ...itemProps}=item;
                 return(
-                    <EmployeeListItem name={item.name} salary= {item.salary}/>
+                    <EmployeeListItem 
+                    key={item.id}             
+                    id = {item.id}
+                    {...itemProps}
+                    onDelete={() => onDelete(id)}
+                    />
                 )
             })
         }

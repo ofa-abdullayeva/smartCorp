@@ -2,8 +2,9 @@
     padding: 10px;
     margin-top: 15px;
     background: #360033;
-    background: -webkit-linear-gradient(to right, #0b8793, #360033);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #0b8793, #360033); 
+    background: linear-gradient( to right, rgba(54, 55, 149, 0.67), rgba(0, 92, 151, 0.67) );
+    color: white;
+    /* background: linear-gradient(to right, #0b8793, #360033);  */
     text-align: left;
     border-radius: 10px;
 }
