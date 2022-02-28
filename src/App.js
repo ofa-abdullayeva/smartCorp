@@ -16,7 +16,9 @@ class App extends Component {
     }
   }
   deleteItem = (id) =>{
-    console.log(id)
+    this.setState(prevstate=>({
+      data:this.state.data.filter(item =>item.id !== id)
+    }))
   }
 
   render(){
