@@ -15,9 +15,14 @@ class App extends Component {
       data: data
     }
   }
+  // deleteItem = (id) =>{
+  //   this.setState(prevstate => ({
+  //     data:this.state.data.filter(item =>item.id !== id)
+  //   }))
+  // }
   deleteItem = (id) =>{
-    this.setState(prevstate=>({
-      data:this.state.data.filter(item =>item.id !== id)
+    this.setState(({data}) => ({
+      data:data.filter(item =>item.id !== id)
     }))
   }
 
