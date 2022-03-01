@@ -4,7 +4,7 @@ import '../employee_list';
 
 
 
-const EmployeeList = ({data , onDelete}) => {
+const EmployeeList = ({data , onDelete,onToggleIncrease,onToggleLike}) => {
   return (
     <ul className='app-list list-group'>
 
@@ -17,6 +17,8 @@ const EmployeeList = ({data , onDelete}) => {
                     id = {item.id}
                     {...itemProps}
                     onDelete={() => onDelete(id)}
+                    onToggleIncrease={() => onToggleIncrease(id)}
+                    onToggleLike={() => onToggleLike(id)}
                     />
                 )
             })

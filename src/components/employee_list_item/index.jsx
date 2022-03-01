@@ -2,47 +2,11 @@ import React  from 'react';
 
 import '../employee_list_item/style.css';
 
-class EmployeeListItem extends React.Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        increase :false,
-        like :false 
-      }
-    }
-    //------ Arrow function --------//
-    // onIncrease = () => {
-    //   this.setState(prevState =>{
-    //     return{increase : !this.state.increase}
-    //   })
-    // }
-    //------  onIncrease  Arrow function short form--------//
-    onIncrease = () => {
-
-      this.setState(({increase}) =>({increase : !increase}))
-
-    }
-
-    // onLike = () =>{
-    //   this.setState(prevState =>{
-    //     return{like : !this.state.like}
-    //   })
-    // }
-
-    onLike = () =>{
-      this.setState(({like }) => ({like : !like}))
-      
-    }
-
-  
-
-
-  render() {
-    //----props----//
-    const { name, salary, onDelete } = this.props;
+const EmployeeListItem = (props) => {
     
-    //----state----//
-    const {increase , like }= this.state
+    //----props----//
+    const { name, salary,increase,like, onDelete, onToggleIncrease, onToggleLike } = props;
+    
 
     let classNames = 'list-group-item d-flex justify-content-between';
 
@@ -58,7 +22,7 @@ class EmployeeListItem extends React.Component {
       <li className={classNames}>
         <span 
         className='list-group-item-label'
-        onClick={this.onLike}
+        onClick={onToggleLike}
         >{name}</span>
         <input type="text"
           className='list-group-item-input'
@@ -66,7 +30,7 @@ class EmployeeListItem extends React.Component {
         <div className='d-flex justify-content-center align-item-center'>
           <button 
           className='btn-bonus btn-sm'
-          onClick={this.onIncrease}>
+          onClick={onToggleIncrease}>
             <i className="fa-solid fa-coins"></i>
           </button>
           <button
@@ -82,6 +46,6 @@ class EmployeeListItem extends React.Component {
     )
   }
 
-}
+
 
 export default EmployeeListItem;
