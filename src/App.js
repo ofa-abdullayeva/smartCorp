@@ -1,6 +1,6 @@
 import { Component } from 'react/cjs/react.production.min';
 import './App.css';
-import AppForm from './components/app_form';
+import AddEmployeeForm from './components/addEmployeeForm';
 import AppInfo from './components/app_info';
 import AppSearch from './components/app_search';
 import { data } from './components/data/data';
@@ -12,20 +12,25 @@ class App extends Component {
     super(props);
 
     this.state ={
-      data: data
+      data: data,
+      searchValue: ""
     }
-
-    
+    this.maxId = 10
   }
   
-   //------ Arrow function --------//
-    // onIncrease = () => {
-    //   this.setState(prevState =>{
-    //     return{increase : !this.state.increase}
-    //   })
-    // }
+  addItem = (name, salary ) =>{
+    const newEmployee = {
+      name :name,
+      salary:salary,
+      like:false,
+      increase: false,
+      id: ++this.maxId
+    }
+    this.setState(state=>({data: [...this.state.data, newEmployee]}))
+  }
+
     //------  onIncrease  Arrow function short form--------//
-    onToggleIncrease = (id) => {
+  onToggleIncrease = (id) => {
       this.setState(({data})=>({
         data: data.map(item =>{
           if (item.id === id) {
@@ -34,29 +39,9 @@ class App extends Component {
           return item;
         })
       }))
-      // console.log(id)
-      // this.setState(({increase}) =>({increase : !increase}))
 
-    }
 
-    // onLike = () =>{
-    //   this.setState(prevState =>{
-    //     return{like : !this.state.like}
-    //   })
-    // }
-
-    // onToggleLike = (id) =>{
-    //   console.log(id)
-    //   this.setState(({data }) => ({like : !like}))
-      
-    // }
-
-  
-  // deleteItem = (id) =>{
-  //   this.setState(prevstate => ({
-  //     data:this.state.data.filter(item =>item.id !== id)
-  //   }))
-  // }
+  }
 
   onToggleLike = (id) => {
     this.setState(({data})=>({
@@ -67,8 +52,7 @@ class App extends Component {
         return item;
       })
     }))
-    // console.log(id)
-    // this.setState(({increase}) =>({increase : !increase}))
+
 
   }
 
@@ -77,20 +61,38 @@ class App extends Component {
       data:data.filter(item =>item.id !== id)
     }))
   }
+
+  searchEmployee = (arr,text) =>{
+    if(text.length === 0) return arr;
+    return arr.filter(item => {
+      return item.name.toLowerCase().indexOf(text) > -1
+    })
+
+  }
+  onUpdateSearch = (text) => {
+    this.setState({
+      searchValue : text
+    })
+  }
   
  
   render(){
-    const {data} = this.state
+    const { data, searchValue } = this.state
     const employeesNumber = data.length
     const increasedEmployee = data.filter(item=>item.increase).length;
-    console.log(increasedEmployee)
+    const visibleData = this.searchEmployee(data,searchValue)   
+    //  bu setrin izahin sorusmaq
+    
     return (
       <div className="App">
       <AppInfo employeesNumber={employeesNumber} increasedEmployee={increasedEmployee}/>
-      <AppForm/>
-      <AppSearch/>
+      <AddEmployeeForm
+      onAdd={this.addItem}/>
+      <AppSearch 
+      onUpdateSearch={this.onUpdateSearch}
+      />
       <EmployeeList 
-      data={this.state.data}
+      data={visibleData}
       onDelete = {this.deleteItem}
       onToggleIncrease = {this.onToggleIncrease}
       onToggleLike = {this.onToggleLike}
