@@ -13,7 +13,8 @@ class App extends Component {
 
     this.state ={
       data: data,
-      searchValue: ""
+      searchValue: "",
+      filter: "bonus"
     }
     this.maxId = 10
   }
@@ -74,13 +75,31 @@ class App extends Component {
       searchValue : text
     })
   }
+
+  filterEmployee = (arr,filter) =>{
+    switch (filter) {
+      case "bonus" :
+        return arr.filter(item=>item.like) ;
+      case "moreThan1500":
+        return arr.filter(item => item.salary >= 1500) ;
+      default :
+        return arr;
+    
+    }
+
+  }
+
+  onFilterSelect = (filter =>{
+    this.setState({ filter: filter })
+  })
   
  
   render(){
-    const { data, searchValue } = this.state
+    const { data, searchValue,filter } = this.state
     const employeesNumber = data.length
     const increasedEmployee = data.filter(item=>item.increase).length;
-    const visibleData = this.searchEmployee(data,searchValue)   
+    const visibleData = this.searchEmployee(data,searchValue);
+    const filteredData = this.filterEmployee(visibleData,filter);
     //  bu setrin izahin sorusmaq
     
     return (
@@ -92,7 +111,7 @@ class App extends Component {
       onUpdateSearch={this.onUpdateSearch}
       />
       <EmployeeList 
-      data={visibleData}
+      data={filteredData}
       onDelete = {this.deleteItem}
       onToggleIncrease = {this.onToggleIncrease}
       onToggleLike = {this.onToggleLike}
